@@ -1,0 +1,32 @@
+Memory Allocation
+*****************
+c: int * x = malloc(...)
+// x[9] = -12;
+free(x);
+
+c++:
+int y;
+int* x;
+x = new int[y];
+// x[9] = -12
+delete x;
+*****************
+Classes
+*****************
+C: structs      store stuff
+C++: Classes    Store stuff AND do stuff
+Store Stuff = Member Variables (also called member data) (SHOULD BE PRIVATE)
+Do Stuff = Member Functions (also called member methods) (MOST SHOULD BE PUBLIC)
+Classes are also called objects
+--->Can protect data/functions<---
+    private:
+    public:
+*****************
+class Ece252 {
+  private:
+    int a;
+    int b;
+  public:
+    float getAverage();
+    int getA();
+}
