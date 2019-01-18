@@ -1,0 +1,35 @@
+class always starts with class
+
+Book() = default constructor
+
+Book(<functions>) = constructor
+
+class <Name> {
+  
+}
+
+class Book {
+
+  private:
+    //variables (Member Variables or Data)
+    int numPages;
+    int currPage;
+
+  public:
+  //functions (Member functions or Methods)
+  void setPage(int page);
+}
+
+void Book:: setPage(int page){
+  currPage = page;
+}
+
+
+int main () {
+  int x;
+  Book* alexander = new Book();
+  alexander -> setPage(16);
+
+  Book* wildThings = new Book();
+  wildThings -> setPage(2);
+}

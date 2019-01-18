@@ -2,7 +2,7 @@
 #include <stdlib.h>
 using namespace std;
 
-long long fib10(int x);
+long fib10(int x);
 int main( int argc, char *argv[]) {
 
 	if (argc < 2){
@@ -15,14 +15,15 @@ int main( int argc, char *argv[]) {
 }
 
 
-long long fib10(int x){
-	if (x==84) return 160500643816367088;
-	if (x==80) return 23416728348467685;
-	if (x==75) return 2111485077978050;
-	if (x==70) return 190392490709135 ;
-	if (x==65) return 17167680177565;
-	if (x==60) return 1548008755920;
-	if (x==55) return 139583862445;
+long fib10(int x){
+	if (x==10) return 55;
+	if (x==9) return 34;
+	if (x==8) return 21;
+	if (x==7) return 13;
+	if (x==6) return 8;
+	if (x==5) return 5;
+	if (x==4) return 3;
+	if (x==3) return 2;
 	if (x==2) return 1;
 	if (x==1) return 1;
 	return fib10(x-1) + fib10(x-2);
