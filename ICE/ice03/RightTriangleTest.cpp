@@ -37,6 +37,9 @@ int main () {
 }
 
 RightTriangle::RightTriangle() {
+	a = 3;
+	b = 4;
+	c = 5;
 }
 
 RightTriangle::RightTriangle(int x, int y, int hypotenuse) {
