@@ -1,3 +1,14 @@
+/*---------------------------------------------------------
+Dylan Brown
+ECE252
+Individual Assignment 1
+
+I have neither given or recieved, nor have I tolerated others' use
+of unauthorized aid.
+
+
+---------------------------------------------------------*/
+
 #include <iostream>
 #include <stdlib.h>
 
@@ -27,19 +38,20 @@ int main(){
   AllKinds* setTwo = new AllKinds();
   setOne->printValues();
   setTwo->printValues();
-  cout << "Integer + Long " << setOne->intPlusLong() << endl;
-  cout << "Integer + Float " << setOne->intPlusFloat() << endl;
-  setOne->setInt(7);
-  setOne->setFloat(2000.198);
-  setOne->setLong(200000);
-  setOne->printValues();
-  cout << "Long - Float " << setOne->longMinusFloat() << endl;
+  setTwo->setInt(7);
+  setTwo->setFloat(1124.65);
+  setTwo->setLong(11265);
+  setTwo->printValues();
+  cout << "-------------------FUNCTIONS-------------------" << endl;
+  cout << "Integer + Long = " << setTwo->intPlusLong() << endl;
+  cout << "Integer + Float = " << setTwo->intPlusFloat() << endl;
+  cout << "Long - Float = " << setTwo ->longMinusFloat() << endl;
 }
 AllKinds::AllKinds(){
   //default values
-  x = 12;
-  y = 192837749019;
-  z = 23.45;
+  x = -1;
+  y = -1;
+  z = -1;
 }
 AllKinds::AllKinds(int a, long b, float c){
   //default values
