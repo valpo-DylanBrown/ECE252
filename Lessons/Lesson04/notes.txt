@@ -1,0 +1,33 @@
+16 bit signed int
+from -2^15 <-> +2^15-1 (~-32000 <-> ~32000)
+
+-------------------------------------------------------------------------------
+Author of Program vs Author of class
+
+AofP:
+  main{
+
+  }
+AofC:
+class Ham {
+private:
+
+public:
+interface functions {}
+
+};
+-------------------------------------------------------------------------------
+Abstract Data Type vs Data Structure
+
+Abstract Data Type:
+  Abstract/idea/picture
+Data Structure:
+  Implementation
+  language specific
+  concrete
+-------------------------------------------------------------------------------
+BAG (data structure)
+  add
+  remove
+  getSize() = return int
+  contains(int) = t or f
