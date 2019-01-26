@@ -34,19 +34,15 @@ public:
   void printValues();
 };
 int main(){
-<<<<<<< HEAD
   AllKinds* setOne = new AllKinds(5, 12345, 19.2);
-=======
-  AllKinds* setOne = new AllKinds(5, 12635, 19.2);
->>>>>>> 279814ade975af4195740cf049dc5516d51ea441
   AllKinds* setTwo = new AllKinds();
   setOne->printValues();
   setTwo->printValues();
   setTwo->setInt(7);
   setTwo->setFloat(1124.65);
   setTwo->setLong(11265);
+  cout << "Set updated" << endl;
   setTwo->printValues();
-<<<<<<< HEAD
   cout << "-------------------FUNCTIONS w Default-------------------" << endl;
   cout << "Integer + Long = " << setTwo->intPlusLong() << endl;
   cout << "Integer + Float = " << setTwo->intPlusFloat() << endl;
@@ -55,16 +51,6 @@ int main(){
   cout << "Integer + Long = " << setOne->intPlusLong() << endl;
   cout << "Integer + Float = " << setOne->intPlusFloat() << endl;
   cout << "Long - Float = " << setOne->longMinusFloat() << endl;
-=======
-  cout << "-------------------FUNCTIONS W/ DEFAULT-------------------" << endl;
-  cout << "Integer + Long = " << setTwo->intPlusLong() << endl;
-  cout << "Integer + Float = " << setTwo->intPlusFloat() << endl;
-  cout << "Long - Float = " << setTwo ->longMinusFloat() << endl;
-  cout << "-------------------FUNCTIONS W/ INTITALIZER-------------------" << endl;
-  cout << "Integer + Long = " << setOne->intPlusLong() << endl;
-  cout << "Integer + Float = " << setOne->intPlusFloat() << endl;
-  cout << "Long - Float = " << setOne ->longMinusFloat() << endl;
->>>>>>> 279814ade975af4195740cf049dc5516d51ea441
 }
 AllKinds::AllKinds(){
   //default values
