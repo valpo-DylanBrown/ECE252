@@ -141,3 +141,26 @@ int main(){
   //cout << "Size: " << one->getSize() << endl;
 
 }
+
+
+
+/* OUTPUT
+*******Welcome to Your Set*******
+
+Empty bag
+Adding Item 6023
+Size: 1
+6023? | The bag contains 6023
+Adding Item n n times
+Removed
+The bag contains 1
+Removed
+Nope, 1 is not in the bag
+Removed
+Nope, 2 is not in the bag
+Removed
+Nope, 2 is not in the bag
+Filled at: 999
+
+
+*/
