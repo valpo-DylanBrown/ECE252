@@ -3,7 +3,7 @@
 using namespace std;
 
 //*******************************
-//NEED TO TEST MORE 
+//NEED TO TEST MORE
 //*******************************
 
 float newRand();
@@ -74,17 +74,16 @@ void CandyMachine::showMoneyEntered(){
 
 void CandyMachine::addMoney(unsigned int cents){
 	moneyEntered += cents;
-	//storedMoney+=moneyEntered;
 }
 
 
 void CandyMachine::pressAButton(){
-	if(itemA != 0){
-		if (moneyEntered < costA){
+	if(itemA != 0){ //is the item in stock?
+		if (moneyEntered < costA){ //not enough money
 			cout << "You need to add an additional " << costA - moneyEntered;
 			cout << " cents." << endl;
 		}
-		else if (moneyEntered > costA){
+		else if (moneyEntered > costA){ //too much money
 			cout << "Wise Choice. Recieve Item A";
 			cout << " and your " << moneyEntered - costA << " cents change below.";
 			cout << endl;
@@ -92,24 +91,24 @@ void CandyMachine::pressAButton(){
 			moneyEntered = 0;
 			itemA--;
 		}
-		else{
+		else{//if the same amount
 			cout << "Wise Choice. Recieve Item A below." << endl;
 			storedMoney+=costA;
 			moneyEntered = 0;
 			itemA--;
 		}
 	}
-	else{
+	else{ //not in stock
 		cout << "Sorry, that item is out. Please choose another." << endl;
 	}
 }
 void CandyMachine::pressBButton(){
-	if(itemB != 0){
-		if (moneyEntered < costB){
+	if(itemB != 0){//is the item in stock?
+		if (moneyEntered < costB){//not enough money
 			cout << "You need to add an additional " << costB - moneyEntered;
 			cout << " cents." << endl;
 		}
-		else if (moneyEntered > costB){
+		else if (moneyEntered > costB){//too much money
 			cout << "Wise Choice. Recieve Item B";
 			cout << " and your " << moneyEntered - costB << " cents change below.";
 			cout << endl;
@@ -117,24 +116,24 @@ void CandyMachine::pressBButton(){
 			moneyEntered = 0;
 			itemB--;
 		}
-		else{
+		else{//if the same amount
 			cout << "Wise Choice. Recieve Item B below." << endl;
 			storedMoney+=costB;
 			moneyEntered = 0;
 			itemB--;
 		}
 	}
-	else{
+	else{//not in stock
 		cout << "Sorry, that item is out. Please choose another." << endl;
 	}
 }
 void CandyMachine::pressCButton(){
-	if(itemC != 0){
-		if (moneyEntered < costC){
+	if(itemC != 0){//is the item in stock?
+		if (moneyEntered < costC){//not enough money
 			cout << "You need to add an additional " << costC - moneyEntered;
 			cout << " cents." << endl;
 		}
-		else if (moneyEntered > costC){
+		else if (moneyEntered > costC){//too much money
 			cout << "Wise Choice. Recieve Item C";
 			cout << " and your " << moneyEntered - costC << " cents change below.";
 			storedMoney+=costC;
@@ -142,14 +141,14 @@ void CandyMachine::pressCButton(){
 			moneyEntered = 0;
 			itemC--;
 		}
-		else{
+		else{//if the same amount
 			cout << "Wise Choice. Recieve Item C below." << endl;
 			storedMoney+=costC;
 			moneyEntered = 0;
 			itemC--;
 		}
 	}
-	else{
+	else{//not in stock
 		cout << "Sorry, that item is out. Please choose another." << endl;
 	}
 }
@@ -221,7 +220,6 @@ int main() {
 	machine->pressBButton();
 
 }
-
 */
 //*************************
 // Use THIS main() in order to comprehensively test
@@ -311,7 +309,6 @@ int main() {
 
 
 }
-
 float newRand()
   {
     static unsigned short lfsr = 0xACE1u;
@@ -321,3 +318,140 @@ float newRand()
     lfsr = (  (lfsr >> 1) | (bit << 15));
 	return (float)lfsr/65536;
   }
+
+
+//*************************
+// SIMPLE OUTPUT
+//*************************
+/*
+$ a.exe
+You have entered 60 cents.
+Wise Choice. Recieve Item A and your 35 cents change below.
+Item A costs 75 cents.
+Machine contains $0.75.
+You need to add an additional 25 cents.
+Wise Choice. Recieve Item A and your 80 cents change below.
+You need to add an additional 75 cents.
+You need to add an additional 75 cents.
+Wise Choice. Recieve Item B and your 35 cents change below.
+Machine contains $2.40.
+There are 3 A's left.
+Wise Choice. Recieve Item A below.
+There are 2 A's left.
+Wise Choice. Recieve Item A and your 10 cents change below.
+Wise Choice. Recieve Item A and your 15 cents change below.
+Sorry, that item is out. Please choose another.
+Wise Choice. Recieve Item B and your 5 cents change below.
+*/
+//*************************
+// COMPREHENSIVE OUTPUT
+//*************************
+/*
+$ a.exe
+You have entered 50 cents.
+You have entered 66 cents.
+You have entered 16020940 cents.
+You need to add an additional 25 cents.
+You need to add an additional 24 cents.
+Wise Choice. Recieve Item C and your 16020815 cents change below.
+
+You have entered 62 cents.
+You have entered 120 cents.
+You have entered 19 cents.
+You need to add an additional 13 cents.
+Wise Choice. Recieve Item B and your 30 cents change below.
+You need to add an additional 106 cents.
+
+You have entered 147 cents.
+You have entered 78 cents.
+You have entered 85 cents.
+Wise Choice. Recieve Item A and your 72 cents change below.
+You need to add an additional 12 cents.
+You need to add an additional 40 cents.
+
+You have entered 33 cents.
+You have entered 89 cents.
+You have entered 125 cents.
+You need to add an additional 42 cents.
+You need to add an additional 1 cents.
+Wise Choice. Recieve Item C below.
+
+You have entered 128 cents.
+You have entered 170 cents.
+You have entered 67 cents.
+Wise Choice. Recieve Item A and your 53 cents change below.
+Wise Choice. Recieve Item B and your 80 cents change below.
+You need to add an additional 58 cents.
+
+You have entered 109 cents.
+You have entered 86 cents.
+You have entered 98 cents.
+Wise Choice. Recieve Item A and your 34 cents change below.
+You need to add an additional 4 cents.
+You need to add an additional 27 cents.
+
+You have entered 16 cents.
+You have entered 91 cents.
+You have entered 137 cents.
+You need to add an additional 59 cents.
+Wise Choice. Recieve Item B and your 1 cents change below.
+Wise Choice. Recieve Item C and your 12 cents change below.
+
+You have entered 35 cents.
+You have entered 6 cents.
+You have entered 64 cents.
+You need to add an additional 40 cents.
+Sorry, that item is out. Please choose another.
+You need to add an additional 61 cents.
+
+You have entered 235 cents.
+You have entered 206 cents.
+You have entered 264 cents.
+
+Wise Choice. Recieve Item C and your 110 cents change below.
+Wise Choice. Recieve Item A and your 131 cents change below.
+Wise Choice. Recieve Item B and your 174 cents change below.
+Wise Choice. Recieve Item B below.
+Wise Choice. Recieve Item A below.
+Wise Choice. Recieve Item C below.
+
+Machine 1 contains $4.40
+There are 2 A's left in Machine 1.
+Machine 2 contains $4.20
+There are 5 C's left in Machine 2.
+Machine 3 contains $5.90
+There are 1 C's left in Machine 3.
+
+Wise Choice. Recieve Item B and your 62 cents change below.
+You need to add an additional 37 cents.
+You need to add an additional 82 cents.
+
+You need to add an additional 10 cents.
+Wise Choice. Recieve Item C and your 56 cents change below.
+You need to add an additional 52 cents.
+
+Wise Choice. Recieve Item B and your 97 cents change below.
+Wise Choice. Recieve Item C and your 55 cents change below.
+You need to add an additional 41 cents.
+
+Sorry, that item is out. Please choose another.
+You need to add an additional 14 cents.
+Wise Choice. Recieve Item C and your 3 cents change below.
+
+Sorry, that item is out. Please choose another.
+Wise Choice. Recieve Item C and your 80 cents change below.
+Sorry, that item is out. Please choose another.
+
+Item A costs 75 cents.
+Item B costs 90 cents.
+Item C costs 125 cents.
+
+
+final tally:
+Machine 1:
+2       0       4       6.20
+Machine 2:
+3       0       2       7.95
+Machine 3:
+5       2       0       7.15
+*/
