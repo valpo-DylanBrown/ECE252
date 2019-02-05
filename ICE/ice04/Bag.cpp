@@ -1,21 +1,22 @@
 #include <iostream>
 using namespace std;
 
+#define MAXSIZE 1000
 
 
 class Bag {
 	private:
-	int contents[1000];
+	int contents[MAXSIZE];
 	int size;
-	
+
 	public:
 	bool add(int num);
 	bool remove(int num);
 	Bag();
-	int getSize(); // number of items in bag 
+	int getSize(); // number of items in bag
 	bool contains(int x); //asks if bag contains the argument
 	bool isEmpty();
-	
+
 };
 
 Bag::Bag(){
@@ -29,21 +30,9 @@ bool Bag::add(int num){
 		return true;
 	}
 	return false;
-	
+
 }
 bool Bag::remove(int num){
-	/*for(int i = 0; i< size; i++){
-		if(num == contents[i]){
-			//take out contents[i]
-			for(int j = i; i < size; j++){
-				contents[j] = contents[j+1];
-			}
-			cout << "Before size call: " << size << endl;
-			size--;
-			cout << "Found it:" << num << " size is:" << size << endl;
-			return true;
-		}
-	}*/
 	for(int i=0; i!=num; i++){
 		for(;i<size; i++){
 			contents[i] =contents[i+1];
@@ -121,10 +110,10 @@ int main(){
 	if(one->contains(2))cout<< "The bag contains 2" << endl;
 	else cout << "Nope, 2 is not in the bag" << endl;
 	cout <<"Adding Item n until full" <<endl;
-	for(int i=1; one->getSize()!=1000; i++){
+	for(int i=1; one->getSize()!=MAXSIZE; i++){
 		one->add(i);
 		if(one->getSize() == 999) cout << "Filled at: " << i << endl;
 	}
 	cout << "Size: " << one->getSize() << endl;
-	
+
 }
