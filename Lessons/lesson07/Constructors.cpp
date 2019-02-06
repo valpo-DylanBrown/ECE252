@@ -2,10 +2,12 @@
 using namespace std;
 
 class ParentClass {
-
+protected:
+	int x;
 	public:
 		ParentClass() {  //default constructor cannot have input arguments.
-			cout << "Calling default Parent constructor" << endl;
+			x=0;
+			cout << "Calling default Parent constructor: " << x << endl;
 		}
 		ParentClass(int x) {
 			cout << "Calling parent's one-var constructor with: " << x << endl;
@@ -19,8 +21,8 @@ class ParentClass {
 class ChildClass : public ParentClass {  //inherit everything possible from ParentClass.
 
 	public:
-		ChildClass(){
-			cout << "Calling Child Class default constructor."<< endl;
+		ChildClass():ParentClass(){
+			cout << "Calling Child Class default constructor." << x << endl;
 		}
 		ChildClass(int x) : ParentClass(x){
 			cout << "Calling Child Class non-default constructor with: "<< x << endl;
@@ -35,5 +37,5 @@ int main() {
 	ParentClass* pc2 = new ParentClass(377218);
 
 	ChildClass* cc1 = new ChildClass();
-	ChildClass* cc2 = new ChildClass(x);
+	ChildClass* cc2 = new ChildClass(113);
 }
