@@ -1,6 +1,5 @@
 #include<iostream>
 using namespace std;
-#define NUMS 9
 class NumberPrinter{
 protected:
   int digitOne, digitTwo, digitThree;
