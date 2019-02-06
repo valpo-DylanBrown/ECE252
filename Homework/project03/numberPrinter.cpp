@@ -10,7 +10,6 @@ public:
   void setFirstDigit(int x);
   void setSecondDigit(int x);
   void setThirdDigit(int x);
-
   virtual void print() = 0;
 };
 
