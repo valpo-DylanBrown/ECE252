@@ -66,7 +66,7 @@ void NumberPrinter::setAllDigits(int x, int y, int z){
 
 void SmallPrinter::print(){
   cout << digitOne << " " << digitTwo << " " << digitThree << endl;
-  cout << endl << endl;
+  cout << endl;
 }
 void MediumPrinter::print(){
   string ln1[10] = {" -- ", "    ", " -- ", " -- ", "    ", " -- ", " -- ", " -- ", " -- ", " -- "};
