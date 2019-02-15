@@ -72,3 +72,55 @@ int main () {
     cout << i->getData() << endl;
   }*/
 }
+
+
+
+//***********
+//OUTPUT
+//***********
+/*
+4c-32-75-9c-9c-29:ice09 dylan$ ./a.out
+First List:
+
+1
+2
+3
+4
+5
+Second List:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Third List
+
+1
+2
+4
+5
+6
+7
+8
+9
+10
+Fourth List
+
+1
+2
+4
+5
+6
+42
+7
+8
+9
+10
+Elements in List: 10
+*/
