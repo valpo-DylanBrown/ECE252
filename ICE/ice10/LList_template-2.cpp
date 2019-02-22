@@ -39,42 +39,22 @@ class LList {
 		int length ();  //returns number of elements in list.
 };
 
-int main() {  	//This is sample input, which you can use to check your code
-
-
+int main() {
 	LList* myList = new LList();
-	myList->append(2);
-	myList->append(3);
-	myList->append(4);
-	myList->print();
-	cout << "LENGTH: " << myList->length() << endl;
-	//cout << "curr element: " << myList->currValue() << endl;
-	myList->next();
-	cout << "curr element: " << myList->currValue() << endl;
-	myList->insert(1);
-	//myList->insert(2);
-	//myList->insert(3);
-	//myList->next();
-	myList->print();
-	cout << "curr element: " << myList->currValue() << endl;
-	myList->remove();
-	myList->print();
-	cout << "curr element: " << myList->currValue() << endl;
-	myList->next();
-	cout << "curr element: " << myList->currValue() << endl;
-	/*
 	myList->append(6);
 	myList->append(12);
 	myList->append(8);
 	myList->print();
 	cout << "curr element: " << myList->currValue() << endl;
 	myList->insert(1);
+	myList->next();
+	cout << "curr element: " << myList->currValue() << endl;
+	myList->print();
+	myList->next();
+	cout << "curr element: " << myList->currValue() << endl;
+	myList->print();
 	myList->insert(2);
 	myList->insert(3);
-	myList->next();
-	myList->print();
-	myList->next();
-	myList->print();
 	myList->insert(44);
 	myList->print();
 	myList->prev();
@@ -91,7 +71,6 @@ int main() {  	//This is sample input, which you can use to check your code
 	myList->next();
 	myList->next();
 	myList->next();
-	myList->next();
 	myList->print();
 	myList->insert(500);
 	myList->print();
@@ -103,7 +82,7 @@ int main() {  	//This is sample input, which you can use to check your code
 	myList->print();
 	myList->next();
 	myList->next();
-	myList->next();
+	myList->prev();
 	myList->next();
 	myList->next();
 	myList->next();
@@ -112,8 +91,6 @@ int main() {  	//This is sample input, which you can use to check your code
 	cout << "curr element: " << myList->currValue() << endl;
 	myList->next();
 	myList->print();
-	myList->insert(-42);
-	myList->next();
 	myList->next();
 	myList->append(66);
 	myList->prev();
@@ -122,11 +99,13 @@ int main() {  	//This is sample input, which you can use to check your code
 	myList->insert(44);
 	myList->next();
 	myList->next();
-	myList->next();
+	myList->prev();
 	myList->next();
 	myList->print();
 	myList->remove();
 	myList->remove();
+	myList->insert(2);
+	myList->insert(3);
 	myList->remove();
 	myList->remove();
 	myList->append(33);
@@ -146,10 +125,15 @@ int main() {  	//This is sample input, which you can use to check your code
 	myList->insert(-100);
 	myList->append(20);
 	myList->print();
-
+	myList->insert(2);
+	myList->insert(3);
+	myList->next();
+	myList->next();
+	myList->insert(44);
+	myList->print();
 return 0;
-*/
 }
+
 
 
 void LList::insert ( int x ){
@@ -163,6 +147,7 @@ Link* tmp = new Link(x);
 //case at start
 if(head->getNext() == NULL){
 	head->setNext(tmp);
+	tail = tmp;
 }
 
 
@@ -170,8 +155,9 @@ if(head->getNext() == NULL){
 else{
 	tmp->setNext(curr->getNext());
 	curr->setNext(tmp);
-}
 
+}
+size++;
 
 };
 
@@ -190,30 +176,38 @@ void LList::append ( int x ){ //done
 
 int LList::remove (){
 	Link* tmp = new Link();
-	Link* next = new Link();
 	tmp = curr;
-	next = tmp->getNext()->getNext();
 	//Case #1: List is empty, nothing to remove.
-
+	if(head == tail){
+		cout << "Remove";
+		return -9999999;
+	}
 	//Case #2: Only one item in list.  Remove it.
-
+	//else if(size == 1){
+	 else if(head->getNext() == tail){
+		free(head->getNext());
+		head->setNext(NULL);
+		tail = head;
+		size--;
+		curr = tmp;
+	}
 
 	//Case #3:Last item in list.
-	/*if(tmp == tail){
-		prev();
-		tmp->getNext()->setNext(NULL);
+	else if(tmp->getNext()->getNext() == NULL){
 		free(tmp->getNext());
+		tmp->setNext(NULL);
 		prev();
 		curr = tmp;
-	}*/
+		size--;
+	}
 
 	//Case #4: Nothing is special.  Removing an item from middle of list.
-//else{
-	free(tmp->getNext());
-	tmp->setNext(next);
-	curr = tmp;
-//}
-
+	else{
+		free(tmp->getNext());
+		tmp->setNext(tmp->getNext()->getNext());
+		curr = tmp;
+		size--;
+	}
 
 
 };
@@ -224,7 +218,9 @@ void LList::next () { // done
 			return;
 		}
 	    //if not, advance one item.
-		curr = curr->getNext();
+		else {
+			curr = curr->getNext();
+		}
 	return;
 };
 
@@ -246,17 +242,22 @@ int LList::currValue () { // done
 	}
 	/*Link* actualCurr = curr->getNext();
 	return actualCurr->getData();*/
-	if(curr == tail){
+	if(curr->getNext() == NULL){ // if tail
 		return curr->getData();
 	}
 	return curr->getNext()->getData();
 };
 
 void LList::print (){ // done
-	for(Link* i = head->getNext(); i!=NULL; i = i->getNext()){
-		cout << i->getData() << " ";
-		if(i->getNext() == NULL){
-			cout << endl;
+	if(size == 0){
+		cout << "List Empty" << endl;
+	}
+	else{
+		for(Link* i = head->getNext(); i!=NULL; i = i->getNext()){
+			cout << i->getData() << " ";
+			if(i->getNext() == NULL){
+				cout << endl;
+			}
 		}
 	}
 };
@@ -264,3 +265,35 @@ void LList::print (){ // done
 int LList::length (){ //done
 	return size;
 };
+
+
+
+
+// OUTPUT
+
+/*
+4c-32-75-9c-9c-29:ice10 dylan$ ./a.out
+6 12 8
+curr element: 6
+curr element: 6
+1 6 12 8
+curr element: 12
+1 6 12 8
+1 6 44 3 2 12 8
+1 6 44 3 2 12 8
+1 6 44 3 2 12 8
+curr element: 100
+101 100 1 6 44 3 2 12 8 1000 10000
+101 100 1 6 44 3 2 12 8 1000 10000
+101 100 1 6 500 44 3 2 12 8 1000 10000
+101 100 1 6 500 44 3 2 12 8 1000 10000
+101 100 1 6 500 44 3 2 12 8 1000 10000
+101 100 440 1 6 500 44 3 2 12 8 1000 10000
+curr element: 2
+101 100 440 1 6 500 44 3 2 12 8 1000 10000
+101 100 440 1 6 500 44 3 44 2 12 8 1000 10000 66 67
+101 100 440 1 6 500 44 3 44 2 1000 10000 66 67 33
+101 100 440 1 6 500 44 3 44 22 2 1000 10000 66 67 33 20
+101 100 440 1 6 500 44 3 44 22 2 1000 10000 66 30 -100 33 20 20
+101 100 440 1 6 500 44 3 44 22 2 1000 10000 66 30 3 2 44 -100 33 20 20 
+*/
