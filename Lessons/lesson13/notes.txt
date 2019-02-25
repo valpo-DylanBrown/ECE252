@@ -1,0 +1,37 @@
+BIG O
+
+
+math version
+f(n) is O(g(n))
+if there exists
+  c, no
+such that
+cg(n)>= f(n) n>no
+
+
+Ex:
+f(n) = 1000n
+g(n) = 1/10*n^2
+
+Q: Is f(n) O(g(n)) | is 1000n(1/10*n^2)
+
+c = 1
+n0 = 10^6
+
+f = 10^9
+g = 10^11
+
+
+USEFUL FAMILY
+
+family  | name
+O(1)      constant
+O(log n)  logarithmic
+O(n)      linear
+O(nlog n) n log n
+O(n^2)    quadratic
+O(n^3)    cubic
+.
+.
+.
+O(2^n)  exponential
