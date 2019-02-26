@@ -12,13 +12,13 @@ void maxInterval1(int* data, int size) {
 	int sum = 0;
 
 	for(int i = 0; i<size; i++){
-		cout << "I: " << i;
+		//cout << "I: " << i;
 		for(int j = i; j<size; j++){
-			cout << " J: " << j;
+			//cout << " J: " << j;
 			for(int k=i; k<=j; k++){
-				cout << " K: " << k << endl;
+				//cout << " K: " << k << endl;
 				sum+=data[k];
-				cout << "Sum: " << sum << endl;
+				//cout << "Sum: " << sum << endl;
 				}
 				if(sum>maxSum){
 					maxSum = sum;
