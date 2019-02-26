@@ -8,7 +8,7 @@ using namespace std;
 void maxInterval1(int* data, int size) {
 	int minIndex;
 	int maxIndex;
-	int maxSum = 0;
+	int maxSum = -9999;
 	int sum = 0;
 
 	for(int i = 0; i<size; i++){
@@ -22,8 +22,8 @@ void maxInterval1(int* data, int size) {
 				}
 				if(sum>maxSum){
 					maxSum = sum;
-					minIndex = data[i];
-					maxIndex = data[j];
+					minIndex = i;
+					maxIndex = j;
 				}
 				sum = 0;
 			}
@@ -37,13 +37,26 @@ void maxInterval2(int* data, int size) {
 
 	int minIndex;
 	int maxIndex;
-	int maxSum;
+	int maxSum = -9999;
 	int oldSum = 0;
 	int newSum = 0;
 	for(int i = 0; i<size; i++){
 		for(int j = i; j<size; j++){
-
+			if(j == i){
+				oldSum = data[j];
+			}
+			else{
+				oldSum = oldSum + data[j];
+				newSum = oldSum;
+				if(newSum > maxSum){
+					maxSum = newSum;
+					minIndex = i;
+					maxIndex = j;
+				}
+			}
 		}
+		oldSum = 0;
+		newSum = 0;
 	}
 
 
@@ -69,10 +82,10 @@ int main ( int argc, char *argv[] ) {
 		dataArray[i] = (rand()%201) - 100; // create -100 to 100
 
 	}
-	for (int i=0; i < n; i++) {
+	/*for (int i=0; i < n; i++) {
 		cout << dataArray[i] << " ";
 	}
-	cout << endl;
+	cout << endl;*/
 	//*************************
 
 	clock_t t;
