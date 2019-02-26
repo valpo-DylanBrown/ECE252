@@ -114,3 +114,13 @@ int main(){
   cout << "ThreeOAK Percent: " << percentThreeKind << endl;
 
 }
+
+
+/*
+----------------------------------------------
+------------------OUTPUT----------------------
+----------------------------------------------
+FiveOAK Percent: 0.0767694
+FourOAK Percent: 2.00638
+ThreeOAK Percent: 21.3049
+*/
