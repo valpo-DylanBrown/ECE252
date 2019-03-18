@@ -6,9 +6,11 @@ using namespace std;
 
 
 void maxInterval1(int* data, int size) {
+	//OLD
+	/*
 	int minIndex;
 	int maxIndex;
-	int maxSum = 0;
+	int maxSum = -9999;
 	int sum = 0;
 
 	for(int i = 0; i<size; i++){
@@ -22,28 +24,105 @@ void maxInterval1(int* data, int size) {
 				}
 				if(sum>maxSum){
 					maxSum = sum;
-					minIndex = data[i];
-					maxIndex = data[j];
+					minIndex = i;
+					maxIndex = j;
 				}
 				sum = 0;
 			}
 	}
 
-	/*	if(sum > maxSum){
-			maxSum = sum;
-			minIndex = data[k];
-			maxIndex = data[j];*/
 
 	cout << "The maximum sum is: " << maxSum << " which occurs between " << minIndex << " and " << maxIndex << endl;
-}
-
-void maxInterval2(int* data, int size) {
+	*/
+	//NEW
 
 	int minIndex;
 	int maxIndex;
-	int maxSum;
+	int maxSum = -9999;
+	int sum = 0;
+
+	for(int i = 0; i<size; i++){
+		if(data[i] >= 0){
+			for(int j = i; j<size; j++){
+				//cout << " J: " << j;
+				if(data[j] >=0){
+					for(int k=i; k<=j; k++){
+						//cout << " K: " << k << endl;
+						sum+=data[k];
+						//cout << "Sum: " << sum << endl;
+						}
+						if(sum>maxSum){
+							maxSum = sum;
+							minIndex = i;
+							maxIndex = j;
+						}
+						sum = 0;
+					}
+				}
+		}
+		//cout << "I: " << i;
+	}
 
 
+	cout << "The maximum sum is: " << maxSum << " which occurs between " << minIndex << " and " << maxIndex << endl;
+
+}
+
+void maxInterval2(int* data, int size) {
+//old
+
+	int minIndex;
+	int maxIndex;
+	int maxSum = -9999;
+	int oldSum = 0;
+	int newSum = 0;
+	for(int i = 0; i<size; i++){
+		for(int j = i; j<size; j++){
+			if(j == i){
+				oldSum = data[j];
+			}
+			else{
+				oldSum = oldSum + data[j];
+				newSum = oldSum;
+				if(newSum > maxSum){
+					maxSum = newSum;
+					minIndex = i;
+					maxIndex = j;
+				}
+			}
+		}
+		oldSum = 0;
+		newSum = 0;
+	}
+
+//new
+/*
+int minIndex;
+int maxIndex;
+int maxSum = -9999;
+int oldSum = 0;
+int newSum = 0;
+for(int i = 0; i<size; i++){
+	if(data[i] >= 0){
+		for(int j = i; j<size; j++){
+			if(j == i){
+				oldSum = data[j];
+			}
+			else{
+				oldSum = oldSum + data[j];
+				newSum = oldSum;
+				if(newSum > maxSum){
+					maxSum = newSum;
+					minIndex = i;
+					maxIndex = j;
+				}
+			}
+		}
+	}
+	oldSum = 0;
+	newSum = 0;
+}
+*/
 	cout << "The maximum sum is: " << maxSum << " which occurs between " << minIndex << " and " << maxIndex << endl;
 
 }
@@ -66,16 +145,17 @@ int main ( int argc, char *argv[] ) {
 		dataArray[i] = (rand()%201) - 100; // create -100 to 100
 
 	}
-	for (int i=0; i < n; i++) {
-		cout << dataArray[i] << endl;
+	/*for (int i=0; i < n; i++) {
+		cout << dataArray[i] << " ";
 	}
+	cout << endl;*/
 	//*************************
 
 	clock_t t;
     t = clock();  //set up and start clock
 
 	maxInterval1(dataArray, n);  // call the function of interest
-
+	//maxInterval2(dataArray, n);  // call the function of interest
 	t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // stop clock
 
@@ -83,3 +163,10 @@ int main ( int argc, char *argv[] ) {
 
 	return 0;
 }
+
+//OUTPUT
+/*
+4c-32-75-9c-9c-29:ice13 dylan$ ./a.out 1000
+The maximum sum is: 3310 which occurs between 199 and 901
+The function took 0.109189 seconds to execute
+*/
