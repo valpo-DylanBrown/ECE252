@@ -8,7 +8,7 @@ using namespace std;
 void maxInterval1(int* data, int size) {
 	int minIndex;
 	int maxIndex;
-	int maxSum = 0;
+	int maxSum = -9999;
 	int sum = 0;
 
 	for(int i = 0; i<size; i++){
@@ -22,17 +22,13 @@ void maxInterval1(int* data, int size) {
 				}
 				if(sum>maxSum){
 					maxSum = sum;
-					minIndex = data[i];
-					maxIndex = data[j];
+					minIndex = i;
+					maxIndex = j;
 				}
 				sum = 0;
 			}
 	}
 
-	/*	if(sum > maxSum){
-			maxSum = sum;
-			minIndex = data[k];
-			maxIndex = data[j];*/
 
 	cout << "The maximum sum is: " << maxSum << " which occurs between " << minIndex << " and " << maxIndex << endl;
 }
@@ -41,7 +37,27 @@ void maxInterval2(int* data, int size) {
 
 	int minIndex;
 	int maxIndex;
-	int maxSum;
+	int maxSum = -9999;
+	int oldSum = 0;
+	int newSum = 0;
+	for(int i = 0; i<size; i++){
+		for(int j = i; j<size; j++){
+			if(j == i){
+				oldSum = data[j];
+			}
+			else{
+				oldSum = oldSum + data[j];
+				newSum = oldSum;
+				if(newSum > maxSum){
+					maxSum = newSum;
+					minIndex = i;
+					maxIndex = j;
+				}
+			}
+		}
+		oldSum = 0;
+		newSum = 0;
+	}
 
 
 	cout << "The maximum sum is: " << maxSum << " which occurs between " << minIndex << " and " << maxIndex << endl;
@@ -66,16 +82,17 @@ int main ( int argc, char *argv[] ) {
 		dataArray[i] = (rand()%201) - 100; // create -100 to 100
 
 	}
-	for (int i=0; i < n; i++) {
-		cout << dataArray[i] << endl;
+	/*for (int i=0; i < n; i++) {
+		cout << dataArray[i] << " ";
 	}
+	cout << endl;*/
 	//*************************
 
 	clock_t t;
     t = clock();  //set up and start clock
 
-	maxInterval1(dataArray, n);  // call the function of interest
-
+	//maxInterval1(dataArray, n);  // call the function of interest
+	maxInterval2(dataArray, n);  // call the function of interest
 	t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // stop clock
 
