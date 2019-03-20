@@ -10,12 +10,11 @@ class DLink { //Dylan Brown
 		DLink* next;
 		DLink* prev;
 	public:
-		DLink() { next = NULL; data = 0; prev = NULL;}
-		DLink (int x) { next = NULL; data = x; prev = NULL;}
+		DLink() { next = NULL; data = 0;}
+		DLink (int x) { next = NULL; data = x;}
 
 		int getData() { return data; }
 		DLink* getNext() { return next; }
-		DLink* getPrev(){ return prev; }
 
 		void setData (int x) { data = x; }
 		void setNext (DLink* nextLink) { next = nextLink; }
