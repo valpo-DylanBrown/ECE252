@@ -55,6 +55,7 @@ bool LLQueue::enqueue(int j){
 	}
 	else{
 		rear->setNext(tmp);
+		tmp->setPrev(rear);
 		rear = tmp;
 		rear->setNext(NULL);
 		size++;
