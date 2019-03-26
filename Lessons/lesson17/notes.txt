@@ -1,0 +1,22 @@
+TREEEEEESSS
+
+top node is root
+siblings: have same parent
+Leaf (external node): Has no children
+Ancestor/descendant: path upwards/downwards which connects
+subtree: Subset of tree (any node)
+depth of a node: for any node, how far down from root
+depth of a tree: depth of lowest Leaf
+
+
+
+Post-Order Transversal:
+1) print left node
+2) print right node
+3) print out payload
+
+void postOrderPrint(BinNode* x){
+  postOrderPrint(x->getLeft());
+  postOrderPrint(x->getRight());
+  cout << x->getData();
+}
