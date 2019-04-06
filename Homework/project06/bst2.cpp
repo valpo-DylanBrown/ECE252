@@ -387,6 +387,10 @@ void BST2::printFlattenedNode(BinNode* myNode, int* array, int level) {
 
 
 
+
+
+
+
 /* OUTPUT
 Dylan@DYLAN-PC /c/users/dylan/documents/github/ece252/homework/project06
 $ a
