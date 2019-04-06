@@ -52,7 +52,7 @@ class BST2 {
 		void printAsTree();
 };
 
-//done
+
 void BST2::printNode(BinNode* myNode) {//recursively print in order.  called by public function print()
   if( myNode == NULL){
 		return;
@@ -62,7 +62,7 @@ void BST2::printNode(BinNode* myNode) {//recursively print in order.  called by 
   printNode(myNode->getRight());
 }
 
-//done
+
 bool BST2::containsNode(BinNode* myNode, int x) {
   if(myNode == NULL){
     return false;
@@ -79,7 +79,7 @@ bool BST2::containsNode(BinNode* myNode, int x) {
 	//return false;
 }
 
-//done
+
 void BST2::insertNode(BinNode* myNode, int x) {
   if(x >= myNode->getData()){
     if(myNode->getRight() == NULL){
@@ -98,13 +98,14 @@ void BST2::insertNode(BinNode* myNode, int x) {
     insertNode(myNode->getLeft(), x);
   }
 }
-//done
+
 void BST2::removeNode(BinNode* myNode, int x) {  //remove node with value x from subtree of myNode.
   //error check
-  if(myNode->getData() == x){
+	/*
+  if((myNode->getData() == x) && ((myNode->getRight()->getData() || myNode->getLeft()->getData()) != x)){
     cout << "Wrong, too far" << endl;
     return;
-  }
+  }*/
 	//Does x belong to the left subtree?
   if(x < myNode->getData()){ //left
     if(myNode->getLeft() == NULL){  //If the left subtree is NULL, the value is not in the tree.  Return.
@@ -151,6 +152,7 @@ void BST2::trimLeft(BinNode* myNode) {  //Remove the left child of myNode
     delete leftChild;
   }
   else{
+		//cout << "2kidTL" << endl;
     val = getMin(leftChild->getRight());
     removeNode(leftChild, val);
     leftChild->setData(val);
@@ -181,8 +183,11 @@ void BST2::trimRight(BinNode* myNode) {  //trim right child of myNode
     delete rightChild;
   }
   else{
+		//cout << "2kidTR" << endl;
+
     val = getMin(rightChild->getRight());
-    removeNode(rightChild, val);
+		//cout << "DATA: " << rightChild->getData() << "\tVAL:" << val << endl;
+		removeNode(rightChild, val);
     rightChild->setData(val);
   }
 }
@@ -213,7 +218,7 @@ void BST2::trimRoot() {  //remove root node from tree.
     root->setData(val);
   }
 }
-//done
+
 int BST2::getMin(BinNode* myNode) {
 	//find and return smallest value in subtree with myNode as root.
 	//if subtree is myNode is NULL, return INT_MIN
@@ -229,10 +234,9 @@ int BST2::getMin(BinNode* myNode) {
   return getMin(myNode->getLeft());
 }
 
-//done
+
 BST2::BST2() { root = NULL; }
 
-//done
 void BST2::insert (int x) {
 	if (root == NULL) {
 		BinNode* tmp = new BinNode(x);
@@ -240,7 +244,7 @@ void BST2::insert (int x) {
 	}
 	else insertNode(root, x);
 }
-//done
+
 void BST2::remove (int x) {
 	//If root is NULL, return from empty tree.
 	//if root's data matches number to be removed, trimRoot.
@@ -256,12 +260,12 @@ void BST2::remove (int x) {
 }
 
 
-//done
+
 bool BST2::contains (int x) {
 	return containsNode(root, x);
 }
 
-//done
+
 void BST2::print () {
 	printNode(root);
 	cout << endl;
@@ -269,63 +273,63 @@ void BST2::print () {
 
 int main () {
 
-  BST2* myBST2 = new BST2();
+		BST2* myBST2 = new BST2();
 
-myBST2->insert(4);
-myBST2->insert(6);
-myBST2->insert(2);
-myBST2->insert(9);
-myBST2->insert(1);
-myBST2->insert(19);
-myBST2->insert(3);
-myBST2->print();
-myBST2->remove(3);
-myBST2->print();
-myBST2->remove(19);
-myBST2->print();
-myBST2->remove(6);
-myBST2->print();
+		myBST2->insert(4);
+		myBST2->insert(6);
+		myBST2->insert(2);
+		myBST2->insert(9);
+		myBST2->insert(1);
+		myBST2->insert(19);
+		myBST2->insert(3);
+		myBST2->print();
+		myBST2->remove(3);
+		myBST2->print();
+		myBST2->remove(19);
+		myBST2->print();
+		myBST2->remove(6);
+		myBST2->print();
 
-srand(12);
-for (int i=0; i<20; i++ ) {
-  myBST2->insert(rand()%200);
-}
-myBST2->print();
+		srand(12);
+		for (int i=0; i<20; i++ ) {
+			myBST2->insert(rand()%200);
+		}
+		myBST2->print();
 
-myBST2->remove(32);
-myBST2->print();
-myBST2->remove(1);
-myBST2->print();
-myBST2->remove(2);
-myBST2->print();
-myBST2->remove(150);
-myBST2->print();
-myBST2->remove(65);
-myBST2->print();
-//remove some numbers not in the tree
-myBST2->remove(8);
-myBST2->remove(190);
-myBST2->remove(100);
+		myBST2->remove(32);
+		myBST2->print();
+		myBST2->remove(1);
+		myBST2->print();
+		myBST2->remove(2);
+		myBST2->print();
+		myBST2->remove(150);
+		myBST2->print();
+		myBST2->remove(65);
+		myBST2->print();
+		//remove some numbers not in the tree
+		myBST2->remove(8);
+		myBST2->remove(190);
+		myBST2->remove(100);
 
-//insert some more numbers...
-for(int i=0; i<10; i++) {
-  myBST2->insert(rand()%200);
-}
-myBST2->print();
+		//insert some more numbers...
+		for(int i=0; i<10; i++) {
+			myBST2->insert(rand()%200);
+		}
+		myBST2->print();
 
-srand(12);
-for (int i=0; i<20; i++ ) {
-  myBST2->remove(rand()%200);
-}
-myBST2->print();
+		srand(12);
+		for (int i=0; i<20; i++ ) {
+			myBST2->remove(rand()%200);
+		}
+		myBST2->print();
 
-myBST2->remove(9);
-myBST2->print();
-myBST2->remove(4);
-myBST2->print();
+		myBST2->remove(9);
+		myBST2->print();
+		myBST2->remove(4);
+		myBST2->print();
 
 
-return 0;
+		return 0;
 }
 
 
@@ -380,3 +384,25 @@ void BST2::printFlattenedNode(BinNode* myNode, int* array, int level) {
 	if (myNode->getRight() != NULL) printFlattenedNode(myNode->getRight(), array, 2*level+2);
 
 }
+
+
+
+/* OUTPUT
+Dylan@DYLAN-PC /c/users/dylan/documents/github/ece252/homework/project06
+$ a
+1 2 3 4 6 9 19
+1 2 4 6 9 19
+1 2 4 6 9
+1 2 4 9
+1 2 4 9 12 28 29 29 32 52 64 65 77 78 81 99 126 147 150 158 165 170 171 181
+1 2 4 9 12 28 29 29 52 64 65 77 78 81 99 126 147 150 158 165 170 171 181
+2 4 9 12 28 29 29 52 64 65 77 78 81 99 126 147 150 158 165 170 171 181
+4 9 12 28 29 29 52 64 65 77 78 81 99 126 147 150 158 165 170 171 181
+4 9 12 28 29 29 52 64 65 77 78 81 99 126 147 158 165 170 171 181
+4 9 12 28 29 29 52 64 77 78 81 99 126 147 158 165 170 171 181
+4 9 12 25 28 29 29 39 52 53 54 64 77 78 81 90 99 126 137 141 147 155 156 158 165
+ 170 171 177 181
+4 9 25 39 53 54 90 137 141 155 156 177
+4 25 39 53 54 90 137 141 155 156 177
+25 39 53 54 90 137 141 155 156 177
+*/
