@@ -34,22 +34,23 @@ public:
   void printValues();
 };
 int main(){
-  AllKinds* setOne = new AllKinds(5, 12635, 19.2);
+  AllKinds* setOne = new AllKinds(5, 12345, 19.2);
   AllKinds* setTwo = new AllKinds();
   setOne->printValues();
   setTwo->printValues();
   setTwo->setInt(7);
   setTwo->setFloat(1124.65);
   setTwo->setLong(11265);
+  cout << "Set updated" << endl;
   setTwo->printValues();
-  cout << "-------------------FUNCTIONS W/ DEFAULT-------------------" << endl;
+  cout << "-------------------FUNCTIONS w Default-------------------" << endl;
   cout << "Integer + Long = " << setTwo->intPlusLong() << endl;
   cout << "Integer + Float = " << setTwo->intPlusFloat() << endl;
-  cout << "Long - Float = " << setTwo ->longMinusFloat() << endl;
-  cout << "-------------------FUNCTIONS W/ INTITALIZER-------------------" << endl;
+  cout << "Long - Float = " << setTwo->longMinusFloat() << endl;
+  cout << "-----------------FUNCTIONS w Initial Case-----------------" << endl;
   cout << "Integer + Long = " << setOne->intPlusLong() << endl;
   cout << "Integer + Float = " << setOne->intPlusFloat() << endl;
-  cout << "Long - Float = " << setOne ->longMinusFloat() << endl;
+  cout << "Long - Float = " << setOne->longMinusFloat() << endl;
 }
 AllKinds::AllKinds(){
   //default values

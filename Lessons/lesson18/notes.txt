@@ -1,0 +1,54 @@
+full tree
+---------
+each node has 0 or 2 children
+          0
+        /   \
+      x       y
+            /   \
+          z      n
+
+Complete tree
+--------------
+Nodes are filled "in order"
+All levels filled except the last (L -> R)
+
+Perfect tree
+------------
+2^n-1 different elements
+N = 2^(depth)-1
+D is approx = log2(N)
+Complete tree with botom level filled
+*********************************************
+Binary Search Trees
+===================
+For a given node,
+      each left child < parent
+      each right child >= parent
+
+                  6
+                /    \
+               4      9
+            /   \    /    \
+          1         7      100
+           \              /     \
+            2            90      200
+
+
+
+contains()
+start at root, contains(root, 1)
+check value
+check if less than or greater than
+go to child
+check value
+
+print()
+in-order traversal
+1)print left subtree if(!=NULL)
+2)print element
+3)print right subtree if(!=NULL)
+
+insert()
+check if greater than or less than until you find null
+create new bin node of data
+set pointer
