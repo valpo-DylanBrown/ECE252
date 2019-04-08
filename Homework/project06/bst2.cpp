@@ -5,7 +5,7 @@ using namespace std;
 
 #define MAX_EL 31
 
-class BinNode {
+class BinNode { //holds binNode
 private:
 		int data;
 		BinNode* left;
@@ -23,7 +23,7 @@ private:
 		void setLeft (BinNode* newLeft) { left = newLeft; }
 };
 
-class BST2 {
+class BST2 { //binary search tree improved
 
 	private:
 		BinNode* root;
@@ -63,26 +63,26 @@ void BST2::printNode(BinNode* myNode) {//recursively print in order.  called by 
 }
 
 
-bool BST2::containsNode(BinNode* myNode, int x) {
-  if(myNode == NULL){
+bool BST2::containsNode(BinNode* myNode, int x) { //look for an integer, called by public contains()
+  if(myNode == NULL){ //if its false return
     return false;
   }
-  if(x == myNode->getData()){
+  if(x == myNode->getData()){ //if the node contains x
 		return true;
 	}
-	if(x >= myNode->getData()){
+	if(x >= myNode->getData()){ //keep going until NULL
 			return containsNode(myNode->getRight(),x);
 	}
-	else{
+	else{ //keep going until NULL
 			return containsNode(myNode->getLeft(),x);
 	}
 	//return false;
 }
 
 
-void BST2::insertNode(BinNode* myNode, int x) {
-  if(x >= myNode->getData()){
-    if(myNode->getRight() == NULL){
+void BST2::insertNode(BinNode* myNode, int x) { //insert a new node in
+  if(x >= myNode->getData()){ //if it is a right child
+    if(myNode->getRight() == NULL){ //find an empty spot
       BinNode* temp = new BinNode(x);
       myNode->setRight(temp);
       return;
@@ -90,7 +90,7 @@ void BST2::insertNode(BinNode* myNode, int x) {
     insertNode(myNode->getRight(), x);
   }
   else{
-    if(myNode->getLeft() == NULL){
+    if(myNode->getLeft() == NULL){ //if its a left child
       BinNode* temp = new BinNode(x);
       myNode->setLeft(temp);
       return;
