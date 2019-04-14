@@ -275,15 +275,17 @@ int main () {
 
 		BST2* myBST2 = new BST2();
 
-		myBST2->insert(4);
 		myBST2->insert(6);
-		myBST2->insert(2);
+		myBST2->insert(4);
 		myBST2->insert(9);
-		myBST2->insert(1);
-		myBST2->insert(19);
-		myBST2->insert(3);
+		myBST2->insert(2);
+		myBST2->insert(21);
+		myBST2->insert(23);
+		myBST2->insert(11);
+		myBST2->insert(16);
 		myBST2->print();
-		myBST2->remove(3);
+		myBST2->printAsTree();
+		/*myBST2->remove(3);
 		myBST2->print();
 		myBST2->remove(19);
 		myBST2->print();
@@ -326,7 +328,7 @@ int main () {
 		myBST2->remove(9);
 		myBST2->print();
 		myBST2->remove(4);
-		myBST2->print();
+		myBST2->print();*/
 
 
 		return 0;

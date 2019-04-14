@@ -1,9 +1,5 @@
 #include <stdlib.h>
 #include <iostream>
-#define PLUS '+'
-#define MINUS '-'
-#define MULTIPLY '*'
-#define DIVIDE '/'
 using namespace std;
 
 class BinNode{
@@ -30,28 +26,25 @@ void postOrderPrint(BinNode* x){
   postOrderPrint(x->getRight());
   cout << x->getData() << " ";
 };
+void preOrderPrint(BinNode* x){
+  if( x == NULL){
+    return;
+  }
+  cout << x->getData() << " ";
+  postOrderPrint(x->getLeft());
+  postOrderPrint(x->getRight());
+
+};
 void inOrderPrint(BinNode* x){
   if( x == NULL){
     return;
   }
-  if(x->getData() == PLUS || MINUS || MULTIPLY || DIVIDE){
-    cout << "(";
-  }
   inOrderPrint(x->getLeft());
   cout << x->getData() << " ";
   inOrderPrint(x->getRight());
-  if(x->getData() == PLUS || MINUS || MULTIPLY || DIVIDE){
-    cout << ")";
-  }
 };
 
 int main(){
-  BinNode* sym1 = new BinNode();
-  BinNode* sym2= new BinNode();
-  BinNode* sym3 = new BinNode();
-  BinNode* sym4 = new BinNode();
-  BinNode* sym5 = new BinNode();
-  BinNode* sym6 = new BinNode();
   BinNode* t1 = new BinNode();
   BinNode* t2 = new BinNode();
   BinNode* t3 = new BinNode();
@@ -59,65 +52,48 @@ int main(){
   BinNode* t5 = new BinNode();
   BinNode* t6 = new BinNode();
   BinNode* t7 = new BinNode();
-  sym1->setData('*');
-  sym1->setRight(t1);
-  sym1->setLeft(sym2);
+  BinNode* t8 = new BinNode();
 
-  sym2->setData('-');
-  sym2->setLeft(sym3);
-  sym2->setRight(sym4);
-
-  sym3->setData('+');
-  sym3->setLeft(t2);
-  sym3->setRight(t3);
-
-  sym4->setData('/');
-  sym4->setLeft(sym5);
-  sym4->setRight(t4);
-
-  sym5->setData('+');
-  sym5->setLeft(t5);
-  sym5->setRight(sym6);
-
-  sym6->setData('*');
-  sym6->setLeft(t6);
-  sym6->setRight(t7);
-
-
-  t1->setData('8');
-  t1->setLeft(NULL);
-  t1->setRight(NULL);
+  t1->setData('1');
+  t1->setLeft(t2);
+  t1->setRight(t3);
 
   t2->setData('2');
-  t2->setLeft(NULL);
-  t2->setRight(NULL);
+  t2->setLeft(t4);
+  t2->setRight(t5);
 
   t3->setData('3');
   t3->setLeft(NULL);
   t3->setRight(NULL);
 
-  t4->setData('5');
-  t4->setLeft(NULL);
+  t4->setData('4');
+  t4->setLeft(t6);
   t4->setRight(NULL);
 
-  t5->setData('6');
-  t5->setLeft(NULL);
-  t5->setRight(NULL);
+  t5->setData('5');
+  t5->setLeft(t7);
+  t5->setRight(t8);
 
-  t6->setData('9');
+  t6->setData('6');
   t6->setLeft(NULL);
   t6->setRight(NULL);
 
-  t7->setData('4');
+  t7->setData('7');
   t7->setLeft(NULL);
   t7->setRight(NULL);
 
+  t8->setData('8');
+  t8->setLeft(NULL);
+  t8->setRight(NULL);
 
-  cout << "POST ORDER" << endl;
-  postOrderPrint(sym1);
-  cout << endl;
   cout << "IN ORDER" << endl;
-  inOrderPrint(sym1);
+  inOrderPrint(t1);
+  cout << endl;
+  cout << "POST ORDER" << endl;
+  postOrderPrint(t1);
+  cout << endl;
+  cout << "PRE ORDER" << endl;
+  preOrderPrint(t1);
   cout << endl;
 
   return 0;

@@ -70,7 +70,7 @@ void maxInterval1(int* data, int size) {
 
 void maxInterval2(int* data, int size) {
 //old
-
+/*
 	int minIndex;
 	int maxIndex;
 	int maxSum = -9999;
@@ -94,9 +94,9 @@ void maxInterval2(int* data, int size) {
 		oldSum = 0;
 		newSum = 0;
 	}
-
+*/
 //new
-/*
+
 int minIndex;
 int maxIndex;
 int maxSum = -9999;
@@ -122,7 +122,7 @@ for(int i = 0; i<size; i++){
 	oldSum = 0;
 	newSum = 0;
 }
-*/
+
 	cout << "The maximum sum is: " << maxSum << " which occurs between " << minIndex << " and " << maxIndex << endl;
 
 }
@@ -154,8 +154,8 @@ int main ( int argc, char *argv[] ) {
 	clock_t t;
     t = clock();  //set up and start clock
 
-	maxInterval1(dataArray, n);  // call the function of interest
-	//maxInterval2(dataArray, n);  // call the function of interest
+	//maxInterval1(dataArray, n);  // call the function of interest
+	maxInterval2(dataArray, n);  // call the function of interest
 	t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // stop clock
 
