@@ -40,30 +40,40 @@ public:
 	}
 	void receivePacket(NetworkPacket* x){
 		NetworkPacket* tmp;
+		//check if the ffront is NULL or if the incoming packet is a priority
 		if(front == NULL || (x->getPriority() == true && front->getPriority() == false)){
 			x->setNext(front);
 			front = x;
 		}
 		else{
-			tmp = front;
-			if(x->getPriority() == true){
+			tmp = front; //start at beginning
+			if(x->getPriority() == true){ //find the end of the trues
 				while(tmp->getNext() != NULL && tmp->getNext()->getPriority() == true){
-					tmp = tmp->getNext();
+					tmp = tmp->getNext(); //keep looking until you find it
 				}
-				x->setNext(tmp->getNext());
-				tmp->setNext(x);
+				x->setNext(tmp->getNext()); //set x's next to the next element
+				tmp->setNext(x); //set tmp's next to x now
 			}
 			else{
-				while(tmp->getNext() != NULL){
+				while(tmp->getNext() != NULL){ //if its false put it at the end
 					tmp = tmp->getNext();
 				}
 				x->setNext(tmp->getNext());
 				tmp->setNext(x);
 			}
-
 		}
+		size++;
 	}
-	NetworkPacket* sendPacket(){
+	NetworkPacket* sendPacket(){ //aka dequeue
+		NetworkPacket* tmp; //packet to return
+		if(front == NULL){ //if the front is empty
+			cout << "Queue Empty. Nothing to remove";
+			return NULL;
+		}
+		tmp = front; //set tmp to front
+		front = front->getNext(); //move forward
+		size--;
+		return tmp; //return out tmp
 
 	}
 	bool isEmpty(){
@@ -77,10 +87,11 @@ public:
 		}
 		else{
 			while(tmp!=NULL){
-				cout << tmp->getPayload() <<" " << endl;
+				cout << tmp->getPayload() <<" ";
 				tmp = tmp->getNext();
 			}
 		}
+		cout << endl;
 	}
 
 };
@@ -97,7 +108,9 @@ char randomLetter() {
 int main () {
 
 	//try just a few packets...
+
 	NetworkRouter* testRouter = new NetworkRouter();
+	
 	testRouter->receivePacket(new NetworkPacket('h', false));
 	testRouter->receivePacket(new NetworkPacket('a', false));
 	testRouter->receivePacket(new NetworkPacket('m', false));
@@ -105,14 +118,7 @@ int main () {
 	testRouter->receivePacket(new NetworkPacket('A', true));
 	testRouter->receivePacket(new NetworkPacket('M', true));
 
-	testRouter->receivePacket(new NetworkPacket('d', false));
-	testRouter->receivePacket(new NetworkPacket('y', false));
-	testRouter->receivePacket(new NetworkPacket('l', false));
-	testRouter->receivePacket(new NetworkPacket('A', true));
-	testRouter->receivePacket(new NetworkPacket('R', true));
-	testRouter->receivePacket(new NetworkPacket('I', true));
-	testRouter->print();
-	/*
+
 	cout << "Easy Test" << endl;
 	for (int i=0; i<6; i++) {
 		cout << testRouter->sendPacket()->getPayload();
@@ -131,7 +137,6 @@ int main () {
 	for (int i=0; i<13; i++) {
 		testRouter->receivePacket(new NetworkPacket	(lowPacket++,false));
 	}
-
 	for (int i=0; i<13; i++) {
 		testRouter->receivePacket(new NetworkPacket	(highPacket++,true));
 		testRouter->receivePacket(new NetworkPacket	(lowPacket++,false));
@@ -142,13 +147,11 @@ int main () {
 		testRouter->receivePacket(new NetworkPacket	(highPacket++,true));
 		cout << testRouter->sendPacket()->getPayload() << " ";
 	}
-	cout << endl;
 
 	while (!testRouter->isEmpty()) {
 		cout << testRouter->sendPacket()->getPayload() << " ";
 	}
 	cout << endl;
-
 
 	//mother of all tests
 	// this adds 1000 packets to the router.  It randomly fills in packets,
@@ -189,6 +192,6 @@ int main () {
 	}
 	cout << endl;
 
-	return 0;*/
+	return 0;
 
 }
