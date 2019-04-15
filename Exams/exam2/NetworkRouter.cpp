@@ -1,11 +1,18 @@
 #include <iostream>
 using namespace std;
-
+/*
+https://www.sanfoundry.com/cpp-program-implements-priority-queue/
+https://www.geeksforgeeks.org/priority-queue-using-linked-list/
+https://codereview.stackexchange.com/questions/174633/minimum-priority-queue-using-singly-linked-list
+https://www.tutorialspoint.com/cplusplus-program-to-implement-priority-queue
+*/
 class NetworkPacket {
 
 	private:
 		bool isPriority;
 		char payload;
+		NetworkPacket* next;
+		NetworkPacket* prev;
 	public:
 		char getPayload() { return payload; }
 		bool getPriority() {return isPriority; }
@@ -13,113 +20,68 @@ class NetworkPacket {
 			isPriority = newPriority;
 			payload = newPayload;
 		}
-};
-class DLink { //Dylan Brown
-
-	private:
-		char data;
-		bool isPriority;
-		DLink* next;
-		DLink* prev;
-	public:
-		DLink() { next = NULL; data = 0; isPriority = false; }
-		DLink (char x, bool p) { next = NULL; data = x; isPriority = p;}
-
-		char getData() { return data; }
-		bool getPriority() {return isPriority;}
-		DLink* getNext() { return next; }
-
-		void setData (int x) { data = x; }
-		void setPriority(bool p) {isPriority = p;}
-		void setNext (DLink* nextLink) { next = nextLink; }
-		void setPrev (DLink* prevLink) { prev = prevLink; }
+		NetworkPacket* getNext() { return next; }
+		NetworkPacket* getPrev() { return prev; }
+		void setPayload (char x) { payload = x; }
+		void setNext (NetworkPacket* nextPacket) { next = nextPacket; }
+		void setPrev (NetworkPacket* prevPacket) { prev = prevPacket; }
 
 };
 
-class LLQueue{ //Dylan Brown
-private:
-	DLink *front;
-	DLink *rear;
-	int size;
-public:
-	LLQueue();
-	bool enqueue(char j, bool p);
-	char dequeue();
-
-	int getSize();
-	char getFirst();
-
-	bool isEmpty();
-
-};
-LLQueue::LLQueue(){
-	front = NULL;
-	rear = NULL;
-	size = 0;
-};
-bool LLQueue::enqueue(char j, bool p){
-	/*DLink* tmp = new DLink();
-	tmp->setData(j);
-	tmp->setNext(NULL);
-	if(front == NULL){
-		front = rear = tmp;
-		rear->setNext(NULL);
-		size++;
-
-	}(
-	else{
-		rear->setNext(tmp);
-		tmp->setPrev(rear);
-		rear = tmp;
-		rear->setNext(NULL);
-		size++;
-	}
-	return true;*/
-	DLink* current = front;
-	DLink* previous = NULL;
-	
-};
-char LLQueue::dequeue(){
-	DLink* tmp = new DLink();
-	int val;
-	if(front == NULL){
-		//cout << "empty queue" << endl;
-		return -1;
-	}
-	tmp = front;
-	val = tmp->getData();
-	front = front->getNext();
-	delete(tmp);
-	size--;
-	return val;
-
-};
-int LLQueue::getSize(){
-	return size;
-};
-char LLQueue::getFirst(){
-	if(size == 0){
-		return 0;
-	}
-	return front->getData();
-}
-bool LLQueue::isEmpty(){
-	return size == 0;
-};
 
 class NetworkRouter {
 private:
-	LLQueue* queue;
+	NetworkPacket* front;
+	int size;
 public:
 	NetworkRouter(){
-		queue = new LLQueue();
-	};
-	void receivePacket(NetworkPacket* x){ //aka enqueue
-		cout << queue->enqueue(x->getPayload(), x->getPriority()) << endl;
-	};
+		front = NULL;
+		size = 0;
+	}
+	void receivePacket(NetworkPacket* x){
+		NetworkPacket* tmp;
+		if(front == NULL || (x->getPriority() == true && front->getPriority() == false)){
+			x->setNext(front);
+			front = x;
+		}
+		else{
+			tmp = front;
+			if(x->getPriority() == true){
+				while(tmp->getNext() != NULL && tmp->getNext()->getPriority() == true){
+					tmp = tmp->getNext();
+				}
+				x->setNext(tmp->getNext());
+				tmp->setNext(x);
+			}
+			else{
+				while(tmp->getNext() != NULL){
+					tmp = tmp->getNext();
+				}
+				x->setNext(tmp->getNext());
+				tmp->setNext(x);
+			}
+
+		}
+	}
 	NetworkPacket* sendPacket(){
-		cout << queue->dequeue() << endl;
-	};
+
+	}
+	bool isEmpty(){
+		return (size == 0);
+	}
+	void print(){
+		NetworkPacket* tmp;
+		tmp = front;
+		if(front == NULL){
+			cout << "Queue empty" << endl;
+		}
+		else{
+			while(tmp!=NULL){
+				cout << tmp->getPayload() <<" " << endl;
+				tmp = tmp->getNext();
+			}
+		}
+	}
 
 };
 
@@ -143,18 +105,20 @@ int main () {
 	testRouter->receivePacket(new NetworkPacket('A', true));
 	testRouter->receivePacket(new NetworkPacket('M', true));
 
-	cout << "Easy Test" << endl;
-	testRouter->sendPacket();
-	testRouter->sendPacket();
-	testRouter->sendPacket();
-	testRouter->sendPacket();
-	testRouter->sendPacket();
-	testRouter->sendPacket();
-	/*for (int i=0; i<6; i++) {
-		cout << testRouter->sendPacket()->getPayload();
-	}*/
-	cout << endl;
+	testRouter->receivePacket(new NetworkPacket('d', false));
+	testRouter->receivePacket(new NetworkPacket('y', false));
+	testRouter->receivePacket(new NetworkPacket('l', false));
+	testRouter->receivePacket(new NetworkPacket('A', true));
+	testRouter->receivePacket(new NetworkPacket('R', true));
+	testRouter->receivePacket(new NetworkPacket('I', true));
+	testRouter->print();
 	/*
+	cout << "Easy Test" << endl;
+	for (int i=0; i<6; i++) {
+		cout << testRouter->sendPacket()->getPayload();
+	}
+	cout << endl;
+
 	//more rigorous test
 	// reset the router
 	delete testRouter;
@@ -225,6 +189,6 @@ int main () {
 	}
 	cout << endl;
 
-	return 0;
-	*/
+	return 0;*/
+
 }
