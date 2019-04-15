@@ -110,7 +110,7 @@ int main () {
 	//try just a few packets...
 
 	NetworkRouter* testRouter = new NetworkRouter();
-	
+
 	testRouter->receivePacket(new NetworkPacket('h', false));
 	testRouter->receivePacket(new NetworkPacket('a', false));
 	testRouter->receivePacket(new NetworkPacket('m', false));
@@ -172,7 +172,6 @@ int main () {
 		testRouter->receivePacket(new NetworkPacket	(randomLetter(),isPriority));
 		//cout << isPriority;
 	}
-
 	cout << endl << "Full Test" << endl;
 
 	//print out the first 25 chars
