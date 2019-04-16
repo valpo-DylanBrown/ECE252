@@ -1,0 +1,34 @@
+Analysis of sorting algorithms
+
+Comparisons:
+(best case)
+Insert sort: O(n)
+Bubble sort: O(n^2)
+Selection Sort: O(n^2)
+
+(average case)
+Insert sort: O(n^2)
+Bubble sort: O(n^2)
+Selection Sort: O(n^2)
+
+(worst case)
+Insert sort: O(n^2)
+Bubble sort: O(n^2)
+Selection Sort: O(n^2)
+
+
+Swaps:
+(best case)
+Insert sort: 0
+Bubble sort: 0
+Selection Sort: O(n)
+
+(average case)
+Insert sort: O(n^2)
+Bubble sort: O(n^2)
+Selection Sort: O(n)
+
+(worst case)
+Insert sort: O(n^2)
+Bubble sort: O(n^2)
+Selection Sort: O(n)

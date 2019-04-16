@@ -1,11 +1,6 @@
 #include <iostream>
 using namespace std;
-/*
-https://www.sanfoundry.com/cpp-program-implements-priority-queue/
-https://www.geeksforgeeks.org/priority-queue-using-linked-list/
-https://codereview.stackexchange.com/questions/174633/minimum-priority-queue-using-singly-linked-list
-https://www.tutorialspoint.com/cplusplus-program-to-implement-priority-queue
-*/
+
 class NetworkPacket {
 
 	private:
@@ -110,7 +105,7 @@ int main () {
 	//try just a few packets...
 
 	NetworkRouter* testRouter = new NetworkRouter();
-	
+
 	testRouter->receivePacket(new NetworkPacket('h', false));
 	testRouter->receivePacket(new NetworkPacket('a', false));
 	testRouter->receivePacket(new NetworkPacket('m', false));
