@@ -74,6 +74,7 @@ public:
 	bool isEmpty(){
 		return (size == 0);
 	}
+	/* //for debugging
 	void print(){
 		NetworkPacket* tmp;
 		tmp = front;
@@ -87,7 +88,7 @@ public:
 			}
 		}
 		cout << endl;
-	}
+	}*/
 
 };
 
@@ -189,3 +190,17 @@ int main () {
 	return 0;
 
 }
+
+/*
+**OUTPUT**
+4c-32-75-9c-9c-29:exam2 dylan$ ./a.out
+Easy Test
+HAMham
+
+Medium Test
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z
+
+Full Test
+H n b S n b Q u Z c H f w n w H f S P w S P Z c N 
+b H S Q G N q u P B n f w Z t K c H S Q G N q P B
+*/
