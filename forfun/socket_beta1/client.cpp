@@ -12,7 +12,7 @@
 int main(int argc, char* argv[])
 {
   int valRead;
-  /*const char* q1 = "How are you?";
+  const char* q1 = "How are you?";
   const char* q2 = "What are you doing?";
   const char* q3 = "What's your favorite color?";
   const char* q4 = "When's your birthday?";
@@ -21,11 +21,11 @@ int main(int argc, char* argv[])
   const char* q7 = "What's your favorite season?";
   const char* q8 = "Where were you born?";
   const char* q9 = "Who made you?";
-  const char* q10 = "What is your name?";*/
+  const char* q10 = "What is your name?";
 
-    if (argc != 2)
+    if (argc != 3)
     {
-        fprintf(stderr, "Usage: client <host>\n");
+        fprintf(stderr, "Usage: client <host> <Message>\n");
         exit(1);
     }
 
@@ -38,21 +38,19 @@ int main(int argc, char* argv[])
     serverAddr.sin_port = htons(PORT);
     serverAddr.sin_addr.s_addr = inet_addr(argv[1]);
     connect(socketId, (struct sockaddr*)&serverAddr, addrSize);
-    bool isStopped = false;
 
-    while(!isStopped){
-      std::cout << "Hello" << std::endl;
-        std::cin >> message;
-        std::cout << "Hello" << std::endl;
-        write(socketId, message, strlen(message));
-        char buffer[CLIENT_BUFFER_SIZE];
-        size_t get = read(socketId, buffer, CLIENT_BUFFER_SIZE - 1);
+    write(socketId, argv[2], strlen(argv[2]));
 
-        buffer[get] = '\0';
-        fprintf(stdout, "%s %s\n", "Response from server:", buffer);
-        if(strcmp(message, "stop") == 0){
-          isStopped = true;
-        }
-    }
+
+    //shutdown(socketId, SHUT_WR);
+
+    char buffer[CLIENT_BUFFER_SIZE];
+    size_t get = read(socketId, buffer, CLIENT_BUFFER_SIZE - 1);
+
+    buffer[get] = '\0';
+    fprintf(stdout, "%s %s\n", "Response from server:", buffer);
+    //write(socketId, q1, strlen(q1));
+    //valRead = read(socketId, buffer, CLIENT_BUFFER_SIZE);
+    //std::cout << buffer << std::endl;
     close(socketId);
 }
