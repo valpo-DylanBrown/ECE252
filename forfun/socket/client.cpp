@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
     bool isStopped = false;
 
     while(!isStopped){
-      std::cout << "Hello" << std::endl;
+        std::cout << "Hello" << std::endl;
         std::cin >> message;
         std::cout << "Hello" << std::endl;
         write(socketId, message, strlen(message));

@@ -1,0 +1,28 @@
+Full stack
+n^2
+2 half stack
+(n/2)^2+(n/2)^2 = n^2/2
+4 quarter stacks
+(n/4)^2+(n/4)^2+(n/4)^2+(n/4)^2 = n^2/4
+
+Mergesort
+O(N log N)
+
+base case for mergeSort()
+base case is array size 1
+
+
+
+za(min)
+1) complete tree
+2) every parent is less than or equal to the children
+
+Add
+1) Put new elements in "next" slot
+2) Sift up
+O(D) = O(log n)
+
+Remove
+1) Replace root w/ "last" element
+2) Sift down
+O(D) = O(log n)
