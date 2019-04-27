@@ -61,6 +61,13 @@ class DataPath {
 			opcode = digit[2];
 			arg1 = digit[1];
 			arg2 = digit[0];
+			/*
+			if(opcode >6){
+				opcode = 0;
+				arg1 = 0;
+				arg2 = 0;
+			}*/
+
 		}
 		else{
 			opcode = 0;
@@ -70,9 +77,9 @@ class DataPath {
 
 
 
-		cout << "OP: " << opcode << endl;
-		cout << "Arg1: " << arg1 << endl;
-		cout << "Arg2: " << arg2 << endl;
+		//cout << "OP: " << opcode << endl;
+		//cout << "Arg1: " << arg1 << endl;
+		//cout << "Arg2: " << arg2 << endl;
 	}
 	//******************************
 
@@ -85,27 +92,28 @@ class DataPath {
 	}
 	pc = 0;
 	for(int i =0; i<MAX_MEMORY; i++){
-		registers[i] = 0;
+		ram[i] = 0;
 	}
 
 	}
 	void execute(){
+		//int tmp;
 		switch(opcode){
 			case 0:
-				cout << "HALT" << endl;
+				//cout << "HALT" << endl;
+				//pc++;
 				break;
 			case 1: //done
-				cout << "GOTO" << endl;
-
-				pc = arg1;
+				//cout << "GOTO" << endl;
+				pc = registers[arg1];
 				break;
 			case 2: // done
-				cout << "LDI" << endl;
+				//cout << "LDI" << endl;
 				registers[arg1] = arg2;
 				pc++;
 				break;
 			case 3:
-				cout << "ADD" << endl;
+				//cout << "ADD" << endl;
 				registers[arg1] = registers[arg1] + registers[arg2];
 				if(registers[arg1] >= MAX_VALUE){
 					registers[arg1] = registers[arg1] % MAX_VALUE;
@@ -113,7 +121,7 @@ class DataPath {
 				pc++;
 				break;
 			case 4:
-				cout << "MULT" << endl;
+				//cout << "MULT" << endl;
 				registers[arg1] = registers[arg1] * registers[arg2];
 				if(registers[arg1] >= MAX_VALUE){
 					registers[arg1] = registers[arg1] % MAX_VALUE;
@@ -121,23 +129,25 @@ class DataPath {
 				pc++;
 				break;
 			case 5:
-				cout << "LOAD" << endl;
-				registers[arg1] = ram[arg2];
+				//cout << "LOAD" << endl;
+				//registers[arg1] = ram[arg2];
+				registers[arg1] = ram[registers[arg2]];
 				if(registers[arg1] >= MAX_VALUE){
 					registers[arg1] = registers[arg1] % MAX_VALUE;
 				}
 				pc++;
 				break;
 			case 6:
-				cout << "STORE" << endl;
-				ram[arg1] = registers[arg2];
+				//cout << "STORE" << endl;
+				//ram[arg1] = registers[arg2];
+				ram[registers[arg1]] = ram[arg2];
 				if(ram[arg1] >= MAX_VALUE){
 					ram[arg1] = ram[arg1] % MAX_VALUE;
 				}
 				pc++;
 				break;
 			default:
-				cout << "ERROR" << endl;
+				//cout << "ERROR" << endl;
 				pc++;
 				break;
 		}
@@ -170,7 +180,7 @@ class DataPath {
 		if(pc >= MAX_MEMORY){
 			pc = pc % MAX_MEMORY;
 		}
-		return ram[pc-1];
+		return ram[pc];
 	}
 
 	// Returns the value stored at Rx
@@ -210,7 +220,7 @@ class DataPath {
 			if(address >= MAX_MEMORY){
 				address = address % MAX_MEMORY;
 			}
-			if(data >= MAX_VALUE){
+			if(data >= 700){
 				data = data % MAX_VALUE;
 			}
 			ram[address] = data;
@@ -291,3 +301,82 @@ int main() {
 
 	return 0;
 }
+
+/* OUTPUTS
+* TEST 1 (Last 4)
+Issuing Step Command:
+System Status:
+R0: 0	R1: 222	R2: 2	R3: 6	R4: 4
+R5: 5	R6: 6	R7: 7	R8: 16	R9: 30
+PC: 19	M[PC]: 999
+
+Issuing Step Command:
+System Status:
+R0: 0	R1: 222	R2: 2	R3: 6	R4: 4
+R5: 5	R6: 6	R7: 7	R8: 16	R9: 30
+PC: 20	M[PC]: 274
+
+Issuing Step Command:
+System Status:
+R0: 0	R1: 222	R2: 2	R3: 6	R4: 4
+R5: 5	R6: 6	R7: 4	R8: 16	R9: 30
+PC: 21	M[PC]: 0
+
+Issuing Step Command:
+System Status:
+R0: 0	R1: 222	R2: 2	R3: 6	R4: 4
+R5: 5	R6: 6	R7: 4	R8: 16	R9: 30
+PC: 21	M[PC]: 0
+
+
+*TEST 2 (last 4)
+Issuing Step Command:
+System Status:
+R0: 0	R1: 1	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 0	R7: 7	R8: 9	R9: 18
+PC: 18	M[PC]: 568
+
+Issuing Step Command:
+System Status:
+R0: 0	R1: 1	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 395	R7: 7	R8: 9	R9: 18
+PC: 19	M[PC]: 687
+
+Issuing Step Command:
+System Status:
+R0: 0	R1: 1	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 395	R7: 7	R8: 9	R9: 18
+PC: 20	M[PC]: 0
+
+Issuing Step Command:
+System Status:
+R0: 0	R1: 1	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 395	R7: 7	R8: 9	R9: 18
+PC: 20	M[PC]: 0
+
+*TEST 3 (last 4)
+Issuing Step Command:
+System Status:
+R0: 18	R1: 18	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 0	R7: 801	R8: 0	R9: 18
+PC: 34	M[PC]: 568
+
+Issuing Step Command:
+System Status:
+R0: 18	R1: 18	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 211	R7: 801	R8: 0	R9: 18
+PC: 35	M[PC]: 687
+
+Issuing Step Command:
+System Status:
+R0: 18	R1: 18	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 211	R7: 801	R8: 0	R9: 18
+PC: 36	M[PC]: 0
+
+Issuing Step Command:
+System Status:
+R0: 18	R1: 18	R2: 0	R3: 0	R4: 0
+R5: 0	R6: 211	R7: 801	R8: 0	R9: 18
+PC: 36	M[PC]: 0
+
+*/
