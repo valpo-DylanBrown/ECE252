@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     serverAddr.sin_port = htons(PORT);
     serverAddr.sin_addr.s_addr = inet_addr(argv[1]);
     connect(socketId, (struct sockaddr*)&serverAddr, addrSize);
-
+    
     write(socketId, argv[2], strlen(argv[2]));
 
 

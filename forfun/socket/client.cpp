@@ -12,6 +12,7 @@
 int main(int argc, char* argv[])
 {
   int valRead;
+
   /*const char* q1 = "How are you?";
   const char* q2 = "What are you doing?";
   const char* q3 = "What's your favorite color?";
@@ -39,20 +40,21 @@ int main(int argc, char* argv[])
     serverAddr.sin_addr.s_addr = inet_addr(argv[1]);
     connect(socketId, (struct sockaddr*)&serverAddr, addrSize);
     bool isStopped = false;
-
-    while(!isStopped){
-        std::cout << "Hello" << std::endl;
-        std::cin >> message;
-        std::cout << "Hello" << std::endl;
-        write(socketId, message, strlen(message));
-        char buffer[CLIENT_BUFFER_SIZE];
-        size_t get = read(socketId, buffer, CLIENT_BUFFER_SIZE - 1);
-
-        buffer[get] = '\0';
-        fprintf(stdout, "%s %s\n", "Response from server:", buffer);
-        if(strcmp(message, "stop") == 0){
-          isStopped = true;
-        }
+    for(int i = 0; i<3; i++){
+      char* message = new char[CLIENT_BUFFER_SIZE];
+      //std::cout << "Hello" << std::endl;
+      std::cout << "Please enter the message you want to send: " << std::endl;
+      std::cin.getline(message,1024);
+      //std::cout << "Hello" << std::endl;
+      write(socketId, message, strlen(message));
+      char buffer[CLIENT_BUFFER_SIZE];
+      size_t get = read(socketId, buffer, CLIENT_BUFFER_SIZE - 1);
+      buffer[get] = '\0';
+      fprintf(stdout, "%s %s\n", "Response from server:", buffer);
+      if(strcmp(message, "stop") == 0){
+        isStopped = true;
+      }
     }
+
     close(socketId);
 }
