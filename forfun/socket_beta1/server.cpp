@@ -91,7 +91,7 @@ int main(){
       write(newSocket , a10 , strlen(a10));
     }
     else if(strcmp(buffer, "stop") == 0){
-      write(newSocket , "Goodbye!" , 8);
+      write(newSocket , "OK, nice chat, bye!" , 19);
       finished = 1;
     }
     else{

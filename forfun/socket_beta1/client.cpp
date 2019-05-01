@@ -26,6 +26,8 @@ int main(int argc, char* argv[])
     if (argc != 3)
     {
         fprintf(stderr, "Usage: client <host> <Message>\n");
+        std::cout << "Please use 127.0.0.1 for localhost." << std::endl;
+        std::cout << "Please encapsulate your message in quotation marks." << std::endl;
         exit(1);
     }
 
@@ -38,7 +40,7 @@ int main(int argc, char* argv[])
     serverAddr.sin_port = htons(PORT);
     serverAddr.sin_addr.s_addr = inet_addr(argv[1]);
     connect(socketId, (struct sockaddr*)&serverAddr, addrSize);
-    
+
     write(socketId, argv[2], strlen(argv[2]));
 
 

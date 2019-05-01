@@ -1,0 +1,25 @@
+This program was developed and compiled on a MacBook pro.
+
+The program uses sockets to communicate between a host and a client.
+
+This program was written in C++. If you have any questions or can not get to work on your machine, please let me know.
+I would be more than willing to demo the program for you.
+
+It is a slightly different program than the one you asked for, but I believe this program gets the job done efficiently. This program sends one packet at a time through a command line argument.
+
+If needed,
+  server:
+    g++ server.cpp -o server
+    g++ client.cpp -o client
+
+    ./server on host
+    ./client <address> <message> on client
+
+If you have any questions, please let me know!
+
+Thanks!
+
+-Dylan Brown
+-05/01/19
+-Yayimli
+-CS-335 Networks: Socket Programming
