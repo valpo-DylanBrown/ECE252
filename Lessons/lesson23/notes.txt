@@ -1,0 +1,27 @@
+O(n^2)
+insertionSort()
+selectionSort()
+bubbleSort()
+
+O(n^1.5)
+shellSort()
+
+o(nlogn)
+mergeSort()
+quickSort()
+heapSort()
+
+O(n)
+bucketSort()
+
+
+bucketSort()
+countingArray
+like a histogram
+O(m) space
+O(n+m) time
+
+
+radixSort()
+O(log10m*n) - time
+O(10n) - space
