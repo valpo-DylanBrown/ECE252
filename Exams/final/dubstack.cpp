@@ -29,6 +29,7 @@ public:
   bool isAEmpty();
   bool isBEmpty();
 
+  int getSizeTotal(){return sizeA+sizeB;}
 
   bool isFull();
 };
@@ -54,7 +55,8 @@ bool DubStack::isFull(){
 }
 
 void DubStack::pushA(int x){
-  if(!isFull()){
+  //if(!isFull()){
+  if(stackA < stackB - 1){
     stackA++;
     data[stackA] = x;
     sizeA++;
@@ -64,7 +66,8 @@ void DubStack::pushA(int x){
   }
 }
 void DubStack::pushB(int x){
-  if(!isFull()){
+  //if(!isFull()){
+  if(stackA < stackB - 1){
     stackB--;
     data[stackB] = x;
     sizeB++;
@@ -101,6 +104,7 @@ int DubStack::popB(){
 }
 
 int main() {
+
 
 	//DubStack,
 	DubStack * simpleStack = new DubStack();
@@ -188,5 +192,43 @@ int main() {
 	cout << "B pop: " << hardStack->popB() << endl;
 	cout << "Is A Empty? " << hardStack->isAEmpty() << endl;
 	cout << "Is B Empty? " << hardStack->isBEmpty() << endl;
-
 }
+
+/*OUTPUT
+4c-32-75-9c-9c-29:final dylan$ ./a.out
+Checking Simple Stack:
+A pop: 3
+B pop: 6
+
+Checking Medium Stack:
+Is A Empty? 0
+Is B Empty? 0
+A pop: 100
+B pop: -197
+A pop: 1
+B pop: 1
+A pop: error, empty stackA
+
+
+-9999
+B pop: error, empty stackB
+
+
+-9999
+
+Checking Hard Stack:
+A pop: 99
+B pop: 899
+error, overflow on stackA
+
+
+error, overflow on stackA
+
+
+Is A Empty? 0
+Is B Empty? 0
+A pop: 0
+B pop: 48
+Is A Empty? 1
+Is B Empty? 0
+*/

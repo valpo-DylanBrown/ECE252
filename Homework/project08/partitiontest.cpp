@@ -1,24 +1,38 @@
 #include <iostream>
 using namespace std;
-#define SIZE 20
+#define SIZE 12
 int data[SIZE];
 
 void swap(int x, int y );
 void printArray(int numElements);
 int partition (int low, int high);
 int main(){
-
+/*
   srand(12);
   for(int i=0; i<SIZE; i++){
     data[i] = rand() % 20;
-  }
+  }*/
+  data[0] = 116;
+  data[1] = 3;
+  data[2] = 100;
+  data[3] = 11;
+  data[4] = 61;
+  data[5] = 54;
+  data[6] = 21;
+  data[7] = 176;
+  data[8] = 63;
+  data[9] = 41;
+  data[10] = 18;
+  data[11] = 59;
+
+
   cout << "ARRAY BEFORE: ";
   printArray(SIZE);
   int p = partition(0,SIZE-1);
   cout << "ARRAY AFTER : ";
   printArray(SIZE);
   cout << endl;
-  //cout << "PIVOT: " << p << endl;
+  cout << "PIVOT: " << p << endl;
 }
 
 void swap(int x, int y ) {
